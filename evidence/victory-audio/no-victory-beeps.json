@@ -1,0 +1,10 @@
+{
+  "method": "The victory bonus must not add any sound to Fur Elise.\n\nCompare real 6502 POKEY output with and without bonus timers throughout the\nmelody, including after the 255-tick victory hold. Verify ordinary bonus and\ngunshot sounds remain available outside that one suppression.\n",
+  "car_sha256": "8a157fbc2d12bbea76719f3a92c96a5cf4355c0a5afe82fe9a6000be68699cd3",
+  "compared_audio_ticks": 720,
+  "suppressed_bonus_ticks": 320,
+  "audible_melody_ticks": 626,
+  "normal_bonus_beep_ticks": 32,
+  "unrelated_gunshot_ticks": 24,
+  "register_mismatches": 0
+}

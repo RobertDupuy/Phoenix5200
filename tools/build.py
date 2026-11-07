@@ -92,11 +92,14 @@ assert all(bytes(b[:0x4000])==base[:0x4000] for b in banks)
 assert all(bytes(b[0x7fc0:])==base[0x7fc0:] for b in banks)
 car=b'CART'+struct.pack('>III',73,sum(rom)&0xffffffff,0)+rom
 (B/'Phoenix-First-Flight.car').write_bytes(car)
+(R/'Phoenix5200.car').write_bytes(car)
 nm=subprocess.check_output([str(MOS/'llvm-nm'),'build/game.elf'],cwd=R,text=True)
 symbols={m[3]:int(m[1],16) for line in nm.splitlines() if (m:=re.match(r'^([0-9A-Fa-f]+)\s+(\w)\s+(.+)$',line))}
 assert symbols['large_collision']<0xa400
 assert symbols['fixed_end']<=0x8000,hex(symbols['fixed_end'])
 assert symbols['expanded_end']<=0xbfc0,hex(symbols['expanded_end'])
+assert symbols['large_population']==7, '5200 release must retain seven large birds'
+assert symbols['escort_population']==cs['escort_population']==5, '5200 release must retain five escorts in both banks'
 assert symbols['alien_movement_cluster_a']%256==symbols['alien_movement_cluster_b']%256==0
 for page in range(48):
  expected=(symbols['alien_movement_cluster_a']//256+page-16) if page<32 else (symbols['alien_movement_cluster_b']//256+page-44)

@@ -1,10 +1,15 @@
-# Phoenix5200 release candidate 3 (v0.31)
+# Phoenix5200 — v0.31 with victory-music fix
 
 Phoenix for an NTSC Atari 5200 with 16 KiB RAM. This 256 KiB CAR type 73 cartridge includes the repeating five-wave game: two small-bird waves, two large-bird waves and the mothership, followed by harder cycles.
 
-[Download Phoenix5200.car](https://raw.githubusercontent.com/RobertDupuy/Phoenix5200/main/Phoenix5200.car) · [Download source](https://github.com/RobertDupuy/Phoenix5200/archive/refs/heads/main.zip) · [Previous published release candidate](https://github.com/RobertDupuy/Phoenix5200/releases/tag/release-candidate-2)
+This release fixes the mothership victory melody being erased
+when its bonus earns an extra life. The arcade's 255-tick tune-selection latch
+is retained. The repeating extra-life beep is now suppressed during Für Elise;
+the life is still awarded and other effects are retained. Seven large birds, five escorts,
+movement, sprite artwork and sound synthesis are unchanged from v0.31.
 
-The cartridge in this checkout is the new candidate. The existing `release-candidate-2` tag and release asset remain unchanged. Rebuild with `LLVM_MOS=/path/to/llvm-mos python3 tools/build.py`; the result is `build/Phoenix-First-Flight.car`.
+Build with `LLVM_MOS=/path/to/llvm-mos python3 tools/build.py`; outputs include
+`Phoenix5200.car` and `build/Phoenix-First-Flight.car`. See `VICTORY-SOUND.md` for the regression and scope.
 
 ## Artwork credit
 
@@ -25,7 +30,10 @@ Identical seven-bird/five-escort CPU fixtures use 7.4% less large-bird drawing w
 
 Validation includes 272 matched rendering scenes, 200 actual ANTIC raster comparisons, 276 source-artwork checks, 411 campaign checks, fifth-escort collision/replenishment checks, and 256 death/respawn cases covering zero through seven survivors. The tests use original-BIOS Altirra emulation; no physical-console test is claimed. Artificial cold-cache stress scenes can take more than four video frames; this is not a fixed-frame-rate engine. Detailed measurements and scope are in `Phoenix5200-Performance-v031.txt` and `evidence/v031/`.
 
-Cartridge SHA-256: `b701ec0da33148052e4aa484d121143327b9b7c191f6c90967d463c400c798e9`.
+Cartridge SHA-256: `8a157fbc2d12bbea76719f3a92c96a5cf4355c0a5afe82fe9a6000be68699cd3`.
+
+The v0.31 measurements above describe its original build; this sound correction
+is validated separately in `evidence/victory-audio/`.
 
 Earlier sections below describe their original revision-specific packages.
 

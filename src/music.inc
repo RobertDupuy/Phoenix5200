@@ -21,6 +21,7 @@
 .set audio_shield_count,0x3e48
 .set audio_impact_count,0x3e49
 .set audio_bonus_count,0x3e4a
+.set audio_victory_count,0x3e4b
 .section .expanded_code,"ax",@progbits
 .global music_update,music_compute,audio_prepare,music_tick,audio_controls,audio_select_tune
 music_compute:
@@ -184,6 +185,13 @@ audio_events:
  lda audio_bonus_count
  beq 7f
  dec audio_bonus_count
+ # The bonus life is still awarded. Consume its timer silently during the
+ # victory melody, so its repeating beep cannot play now or be queued later.
+ ldx audio_victory_count
+ bne 7f
+ ldx tune
+ cpx #2
+ beq 7f
  and #8
  ora #7
  sta g_sound_b
@@ -272,6 +280,17 @@ audio_shot:
  ora #64
  sta g_sound_a
 audio_controls_done:
+ # Arcade $255B/$3923: reassert tune 2 for 255 audio ticks. A one-time
+ # write loses the melody when the mothership score also earns an extra life:
+ # that effect writes the entire B latch. Preserve its low effect bits.
+ lda audio_victory_count
+ beq 7f
+ dec audio_victory_count
+ lda g_sound_b
+ and #63
+ ora #128
+ sta g_sound_b
+7:
  lda boss_status
  cmp #3
  bcs 1f

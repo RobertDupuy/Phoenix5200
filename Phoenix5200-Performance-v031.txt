@@ -49,6 +49,6 @@ Scope:
   periodic invulnerability writes to retain the full enemy load. Between
   setup and observation, the cartridge executes its normal code. These are
   not controller-only playthroughs or physical-hardware certification.
-  Existing release-candidate-2 and its cartridge asset are unchanged.
+  The current release cartridge and tagged source match this tested build.
 
 Artwork: hand-drawn Atari 5200 artwork by T1X.

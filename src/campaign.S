@@ -290,6 +290,8 @@ boss_end_tick:
  sta boss_status
  lda #64
  sta boss_timer
+ lda #255
+ sta audio_victory_count
  lda g_sound_b
  and #63
  ora #128

@@ -1,4 +1,4 @@
-Phoenix5200 release candidate 3 (v0.31)
+Phoenix5200 v0.31
 
 Seven large birds in each large-bird wave; five mothership escorts.
 The added escort can be hit and participates in normal replenishment.
@@ -13,5 +13,6 @@ NTSC Atari 5200; 16 KiB RAM; CAR type 73; 256 KiB payload.
 Movement, fast-mode thresholds, sound and sprite pixels are unchanged.
 Hand-drawn Atari 5200 artwork by T1X.
 
-This is a new candidate. Existing release-candidate-2 remains unchanged.
+The current release download and tagged source are updated to this build.
+The existing release title and tag name are retained.
 See Phoenix5200-Performance-v031.txt for measured timing and test scope.
